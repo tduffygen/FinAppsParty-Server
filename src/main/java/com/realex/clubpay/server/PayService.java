@@ -59,6 +59,7 @@ public class PayService {
 		String phoneId = hppRequest.getCommentTwo();
 		System.out.println("moteId: " + moteId);
 		System.out.println("phoneId: " + phoneId);
+		System.out.println(hppRequest.getMerchantId());
 		
 		hppRequest
 				.addMerchantId(RequestConstants.MERCHANT_ID)
