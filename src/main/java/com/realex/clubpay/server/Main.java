@@ -79,7 +79,7 @@ public class Main {
 		System.out.println("RequestString: " + requestString);
 
 		String jsonResponse = URLDecoder.decode(requestString, "UTF-8");
-		jsonResponse = requestString.replace("hppResponse=", "");
+		jsonResponse = jsonResponse.replace("hppResponse=", "");
 		System.out.println("JsonResponse: " + jsonResponse);
 
 		return (payService.validateJsonResponse(jsonResponse) ? "true" : "false");
