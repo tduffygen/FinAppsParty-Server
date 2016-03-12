@@ -3,7 +3,13 @@
  */
 package com.realex.clubpay.server;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,14 +73,19 @@ public class Main {
 	}
 
 	@RequestMapping("/validateJsonResponse")
-	public String validateJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
+//	public String validateJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
+	public String validateJsonResponse(@RequestBody String requestString, HttpServletRequest req) throws UnsupportedEncodingException{
 		System.out.println("At deocdeJsonResponse endpoint.");
+		System.out.println("RequestString: " + requestString);
+
+		String jsonResponse = URLDecoder.decode(requestString, "UTF-8");
+		jsonResponse = requestString.replace("hppResponse=", "");
 		System.out.println("JsonResponse: " + jsonResponse);
 
 		return (payService.validateJsonResponse(jsonResponse) ? "true" : "false");
 	}
 
-    @RequestMapping("/generateReceiptIn")
+	@RequestMapping("/generateReceiptIn")
     public boolean generateRecieptIn(@RequestParam("phoneId") String phoneId,
     		@RequestParam("moteId") String moteId) {
     	System.out.println("At generateReceiptIn endpoint.");
