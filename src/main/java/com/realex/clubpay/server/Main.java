@@ -4,6 +4,7 @@
 package com.realex.clubpay.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.realexpayments.hpp.sdk.domain.HppRequest;
 
 @RestController
 public class Main {
@@ -56,11 +59,12 @@ public class Main {
 	}
 
 	@RequestMapping("/generateJsonRequest")
-	public String generateJsonRequest(@RequestParam("moteId") String moteId) {
+	public String generateJsonRequest(@RequestParam HppRequest hppRequest) {
 		System.out.println("At generateJson endpoint.");
-		System.out.println("MoteID: " + moteId);
+//		System.out.println("JsonResponse: " + jsonResponse);
+		System.out.println("HppRequest: " + hppRequest);
 
-		return payService.generateJsonRequest(moteId);
+		return payService.generateJsonRequest();
 	}
 
 	@RequestMapping("/validateJsonResponse")
