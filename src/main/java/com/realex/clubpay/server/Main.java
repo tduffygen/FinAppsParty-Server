@@ -31,12 +31,9 @@ public class Main {
 	}
 
 	@RequestMapping("/payAction")
-	public String pay(@RequestParam("timestamp") String timestamp, @RequestParam("phoneId") String phoneIdentifier,
-			@RequestParam("moteId") String moteId) {
+	public String pay(@RequestParam("phoneId") String phoneIdentifier) {
 		System.out.println("At pay endpoint.");
-		System.out.println("Timestamp: " + timestamp);
 		System.out.println("PhoneID: " + phoneIdentifier);
-		System.out.println("MoteID: " + moteId);
 
 		if (payService.detailsStored(phoneIdentifier)) {
 			return "true";
@@ -47,7 +44,7 @@ public class Main {
 	@RequestMapping("/validateHppResponse")
 	public String validate(@RequestParam("phoneId") String phoneId, @RequestParam("moteId") String moteId,
 			@RequestParam("payerRef") String payerRef, @RequestParam("cardRef") String cardRef) {
-		System.out.println("At pay endpoint.");
+		System.out.println("At validateHppResponse endpoint.");
 		System.out.println("PhoneID: " + phoneId);
 		System.out.println("MoteID: " + moteId);
 		System.out.println("payerRef: " + payerRef);
