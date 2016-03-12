@@ -64,6 +64,14 @@ public class Main {
 		return payService.generateJsonRequest(moteId, storeCard);
 	}
 
+	@RequestMapping("/decodeJsonResponse")
+	public String decodeJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
+		System.out.println("At deocdeJsonResponse endpoint.");
+		System.out.println("JsonResponse: " + jsonResponse);
+
+		return (payService.validateJsonResponse(jsonResponse) ? "true" : "false");
+	}
+
     @RequestMapping("/generateReceiptIn")
     public boolean generateRecieptIn(@RequestParam("phoneId") String phoneId,
     		@RequestParam("moteId") String moteId) {

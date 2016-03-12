@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.realexpayments.hpp.sdk.RealexHpp;
 import com.realexpayments.hpp.sdk.domain.HppRequest;
+import com.realexpayments.hpp.sdk.domain.HppResponse;
 import com.realexpayments.remote.sdk.RealexClient;
 import com.realexpayments.remote.sdk.domain.payment.PaymentRequest;
 import com.realexpayments.remote.sdk.domain.payment.PaymentRequest.PaymentType;
@@ -68,6 +69,22 @@ public class PayService {
 	}
 
 	/**
+	 * Decode and validate json response and see if the transaction was successful or not.
+	 * 
+	 * @param jsonResponse
+	 * @return
+	 */
+	public boolean validateJsonResponse(String jsonResponse) {
+
+		HppResponse hppResponse = realexHpp.responseFromJson(jsonResponse);
+		
+		if (hppResponse.getAuthCode().equals(RequestConstants.SUCCESS)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Generate a receipt in.
 	 * 
 	 * @param phoneId
@@ -75,7 +92,6 @@ public class PayService {
 	 */
 	public boolean generateReceiptInRequest(String phoneId, String moteId) {
 
-		/*
 		CustomerVO customer = customerLookup.get(phoneId);
 		String payerRef = customer.getPayerRef();
 		String cardRef = customer.getCardRef();
@@ -92,7 +108,6 @@ public class PayService {
 		if ( response.getAuthCode().equals("00")) {
 			return true;
 		}
-		*/
 		return false;
 	}
 
