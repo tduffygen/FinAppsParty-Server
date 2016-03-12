@@ -24,7 +24,7 @@ public class PayService {
 	private Map<String, Long> amountLookup = new HashMap<String, Long>();
 
 	public PayService() {
-		amountLookup.put("moteId1", 1000l);
+		amountLookup.put("b9407f30-f5f8-466e-aff9-25556b57fe6d", 1000l);
 		amountLookup.put("moteId2", 2000l);
 		amountLookup.put("moteId3", 3000l);
 		this.realexHpp = new RealexHpp(RequestConstants.SECRET);
@@ -55,13 +55,19 @@ public class PayService {
 	 */
 	public String generateJsonRequest(HppRequest hppRequest) {
 
+		String moteId = hppRequest.getSupplementaryData().get("moteId");
+		String phoneId = hppRequest.getSupplementaryData().get("phoneId");
+		System.out.println("moteId: " + moteId);
+		System.out.println("phoneId: " + phoneId);
+		
 		hppRequest
 				.addMerchantId(RequestConstants.MERCHANT_ID)
-				.addAmount(getAmountToCharge("moteId1"))
+				.addAmount(getAmountToCharge(moteId))
 				.addAutoSettleFlag(true)
 				.addCardStorageEnable(true)
 				.addCurrency(RequestConstants.CURRENCY)
-				.addPayerReference("payerref1")
+				.addPayerReference(phoneId)
+				.addPayerExists(false)
 				.addOfferSaveCard(true);
 
 		return realexHpp.requestToJson(hppRequest);
