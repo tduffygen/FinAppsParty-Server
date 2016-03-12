@@ -64,4 +64,15 @@ public class Main {
 		return payService.generateJsonRequest(moteId, storeCard);
 	}
 
+    @RequestMapping("/generateReceiptIn")
+    public boolean generateRecieptIn(@RequestParam("phoneId") String phoneId,
+    		@RequestParam("moteId") String moteId) {
+    	System.out.println("At generateReceiptIn endpoint.");
+    	System.out.println("PhoneID: " + phoneId);
+    	System.out.println("MoteID: " + moteId);
+    	
+    	return payService.generateReceiptInRequest(phoneId, moteId);
+    }
+    
+
 }

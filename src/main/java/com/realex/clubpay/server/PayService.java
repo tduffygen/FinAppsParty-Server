@@ -7,11 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.realexpayments.hpp.sdk.RealexHpp;
 import com.realexpayments.hpp.sdk.domain.HppRequest;
+import com.realexpayments.remote.sdk.RealexClient;
+import com.realexpayments.remote.sdk.domain.payment.PaymentRequest;
+import com.realexpayments.remote.sdk.domain.payment.PaymentRequest.PaymentType;
+import com.realexpayments.remote.sdk.domain.payment.PaymentResponse;
 
 @Service
 public class PayService {
 
 	RealexHpp realexHpp;
+	RealexClient realexClient;
 
 	private Map<String, CustomerVO> customerLookup = new HashMap<String, CustomerVO>();
 
@@ -22,6 +27,7 @@ public class PayService {
 		amountLookup.put("moteId2", 2000l);
 		amountLookup.put("moteId3", 3000l);
 		this.realexHpp = new RealexHpp(RequestConstants.SECRET);
+		this.realexClient = new RealexClient(RequestConstants.SECRET);
 	}
 
 	/**
@@ -50,16 +56,15 @@ public class PayService {
 	 */
 	public String generateJsonRequest(String moteId, boolean storeCard) {
 
-		HppRequest hppRequest = new HppRequest();
-		hppRequest.setMerchantId(RequestConstants.MERCHANT_ID);
-		hppRequest.addAmount(getAmountToCharge(moteId));
-		hppRequest.addAutoSettleFlag(true);
-		hppRequest.addCardStorageEnable(storeCard);
-		hppRequest.addCurrency(RequestConstants.CURRENCY);
-		hppRequest.addOfferSaveCard(true);
+		HppRequest hppRequest = new HppRequest()
+				.addMerchantId(RequestConstants.MERCHANT_ID)
+				.addAmount(getAmountToCharge(moteId))
+				.addAutoSettleFlag(true)
+				.addCardStorageEnable(storeCard)
+				.addCurrency(RequestConstants.CURRENCY)
+				.addOfferSaveCard(true);
 
-		realexHpp.requestToJson(hppRequest);
-		return null;
+		return realexHpp.requestToJson(hppRequest);
 	}
 
 	/**
@@ -68,9 +73,27 @@ public class PayService {
 	 * @param phoneId
 	 * @return
 	 */
-	public String generateReceiptInRequest(String phoneId) {
+	public boolean generateReceiptInRequest(String phoneId, String moteId) {
 
-		return null;
+		/*
+		CustomerVO customer = customerLookup.get(phoneId);
+		String payerRef = customer.getPayerRef();
+		String cardRef = customer.getCardRef();
+
+		PaymentRequest paymentRequest = new PaymentRequest()
+				.addMerchantId(RequestConstants.MERCHANT_ID)
+				.addType(PaymentType.RECEIPT_IN)
+				.addAmount(getAmountToCharge(moteId))
+				.addCurrency(RequestConstants.CURRENCY)
+				.addPayerReference(payerRef)
+				.addPaymentMethod(cardRef);
+		
+		PaymentResponse response = realexClient.send(paymentRequest);
+		if ( response.getAuthCode().equals("00")) {
+			return true;
+		}
+		*/
+		return false;
 	}
 
 	public long getAmountToCharge(String moteId) {
