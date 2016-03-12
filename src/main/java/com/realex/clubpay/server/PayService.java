@@ -1,13 +1,18 @@
 package com.realex.clubpay.server;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
 
 import com.realexpayments.hpp.sdk.RealexHpp;
 import com.realexpayments.hpp.sdk.domain.HppRequest;
 
+@Service
 public class PayService {
 
-	@Autowired
+	private Map<String, CustomerVO> lookup = new HashMap<String, CustomerVO>();
+
 	RealexHpp realexHpp;
 
 	public PayService() {
@@ -25,7 +30,7 @@ public class PayService {
 	}
 
 	/**
-	 * Generate the JSON request required for getting a HPP page. 
+	 * Generate the JSON request required for getting a HPP page.
 	 * 
 	 * @param moteId
 	 * @param storeCard
@@ -44,7 +49,7 @@ public class PayService {
 		realexHpp.requestToJson(hppRequest);
 		return null;
 	}
-	
+
 	public long getAmountToCharge(String moteId) {
 		return 1000; // equals 10.00
 	}
