@@ -44,5 +44,15 @@ public class Main {
         return "false";
     }
     
+    @RequestMapping("/generateJson")
+    public String pay(@RequestParam("moteId") String moteId,
+    		@RequestParam("storeCard") boolean storeCard) {
+    	System.out.println("At generateJson endpoint.");
+    	System.out.println("MoteID: " + moteId);
+    	System.out.println("StoreCard: " + storeCard);
+    	
+    	return payService.generateJsonRequest(moteId, storeCard);
+    }
+    
 
 }

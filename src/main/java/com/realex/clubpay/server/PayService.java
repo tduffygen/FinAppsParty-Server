@@ -16,6 +16,7 @@ public class PayService {
 
 	/**
 	 * Determine if it this user has their details stored already.
+	 * 
 	 * @param phoneId
 	 * @return true if they have otherwise false
 	 */
@@ -23,6 +24,13 @@ public class PayService {
 		return true;
 	}
 
+	/**
+	 * Generate the JSON request required for getting a HPP page. 
+	 * 
+	 * @param moteId
+	 * @param storeCard
+	 * @return
+	 */
 	public String generateJsonRequest(String moteId, boolean storeCard) {
 
 		HppRequest hppRequest = new HppRequest();
