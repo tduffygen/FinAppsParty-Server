@@ -4,7 +4,7 @@
 
   <groupId>com.realex.clubpay</groupId>
   <artifactId>clubpay-server</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.8-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <properties>

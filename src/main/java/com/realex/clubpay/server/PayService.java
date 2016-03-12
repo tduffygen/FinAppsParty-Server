@@ -53,14 +53,15 @@ public class PayService {
 	 * 
 	 * @return
 	 */
-	public String generateJsonRequest() {
+	public String generateJsonRequest(HppRequest hppRequest) {
 
-		HppRequest hppRequest = new HppRequest()
+		hppRequest
 				.addMerchantId(RequestConstants.MERCHANT_ID)
 				.addAmount(getAmountToCharge("moteId1"))
 				.addAutoSettleFlag(true)
 				.addCardStorageEnable(true)
 				.addCurrency(RequestConstants.CURRENCY)
+				.addPayerReference("payerref1")
 				.addOfferSaveCard(true);
 
 		return realexHpp.requestToJson(hppRequest);
