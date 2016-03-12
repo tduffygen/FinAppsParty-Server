@@ -83,14 +83,10 @@ public class PayService {
 	 * @param jsonResponse
 	 * @return
 	 */
-	public boolean validateJsonResponse(String jsonResponse) {
+	public HppResponse validateJsonResponse(String jsonResponse) {
 
 		HppResponse hppResponse = realexHpp.responseFromJson(jsonResponse);
-		
-		if (hppResponse.getAuthCode().equals(RequestConstants.SUCCESS)) {
-			return true;
-		}
-		return false;
+		return hppResponse;
 	}
 
 	/**

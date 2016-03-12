@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.realexpayments.hpp.sdk.domain.HppRequest;
+import com.realexpayments.hpp.sdk.domain.HppResponse;
 
 @RestController
 public class Main {
@@ -74,7 +75,7 @@ public class Main {
 
 	@RequestMapping("/validateJsonResponse")
 //	public String validateJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
-	public String validateJsonResponse(@RequestBody String requestString, HttpServletRequest req) throws UnsupportedEncodingException{
+	public HppResponse validateJsonResponse(@RequestBody String requestString, HttpServletRequest req) throws UnsupportedEncodingException{
 		System.out.println("At deocdeJsonResponse endpoint.");
 		System.out.println("RequestString: " + requestString);
 
@@ -82,7 +83,7 @@ public class Main {
 		jsonResponse = jsonResponse.replace("hppResponse=", "");
 		System.out.println("JsonResponse: " + jsonResponse);
 
-		return (payService.validateJsonResponse(jsonResponse) ? "true" : "false");
+		return payService.validateJsonResponse(jsonResponse);
 	}
 
 	@RequestMapping("/generateReceiptIn")
