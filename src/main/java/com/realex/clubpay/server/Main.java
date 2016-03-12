@@ -59,7 +59,7 @@ public class Main {
 	}
 
 	@RequestMapping("/generateJsonRequest")
-	public String generateJsonRequest(@RequestParam HppRequest hppRequest) {
+	public String generateJsonRequest(HppRequest hppRequest) {
 		System.out.println("At generateJson endpoint.");
 //		System.out.println("JsonResponse: " + jsonResponse);
 		System.out.println("HppRequest: " + hppRequest);
