@@ -86,7 +86,7 @@ public class PayService {
 	public HppResponse validateJsonResponse(String jsonResponse) {
 
 		HppResponse hppResponse = realexHpp.responseFromJson(jsonResponse);
-		addDetails(hardCodedPhoneId, hardCodedPhoneId, "cardId");
+		//addDetails(hardCodedPhoneId, hardCodedPhoneId, "cardId");
 		return hppResponse;
 	}
 
