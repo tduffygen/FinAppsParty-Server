@@ -52,16 +52,15 @@ public class PayService {
 	 * Generate the JSON request required for getting a HPP page.
 	 * 
 	 * @param moteId
-	 * @param storeCard
 	 * @return
 	 */
-	public String generateJsonRequest(String moteId, boolean storeCard) {
+	public String generateJsonRequest(String moteId) {
 
 		HppRequest hppRequest = new HppRequest()
 				.addMerchantId(RequestConstants.MERCHANT_ID)
 				.addAmount(getAmountToCharge(moteId))
 				.addAutoSettleFlag(true)
-				.addCardStorageEnable(storeCard)
+				.addCardStorageEnable(true)
 				.addCurrency(RequestConstants.CURRENCY)
 				.addOfferSaveCard(true);
 

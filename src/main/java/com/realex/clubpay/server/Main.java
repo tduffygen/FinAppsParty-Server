@@ -55,17 +55,16 @@ public class Main {
 		return "true";
 	}
 
-	@RequestMapping("/generateJson")
-	public String pay(@RequestParam("moteId") String moteId, @RequestParam("storeCard") boolean storeCard) {
+	@RequestMapping("/generateJsonRequest")
+	public String generateJsonRequest(@RequestParam("moteId") String moteId) {
 		System.out.println("At generateJson endpoint.");
 		System.out.println("MoteID: " + moteId);
-		System.out.println("StoreCard: " + storeCard);
 
-		return payService.generateJsonRequest(moteId, storeCard);
+		return payService.generateJsonRequest(moteId);
 	}
 
-	@RequestMapping("/decodeJsonResponse")
-	public String decodeJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
+	@RequestMapping("/validateJsonResponse")
+	public String validateJsonResponse(@RequestParam("jsonResponse") String jsonResponse) {
 		System.out.println("At deocdeJsonResponse endpoint.");
 		System.out.println("JsonResponse: " + jsonResponse);
 
