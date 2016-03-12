@@ -55,8 +55,8 @@ public class PayService {
 	 */
 	public String generateJsonRequest(HppRequest hppRequest) {
 
-		String moteId = hppRequest.getSupplementaryData().get("moteId");
-		String phoneId = hppRequest.getSupplementaryData().get("phoneId");
+		String moteId = hppRequest.getCommentOne();
+		String phoneId = hppRequest.getCommentTwo();
 		System.out.println("moteId: " + moteId);
 		System.out.println("phoneId: " + phoneId);
 		
