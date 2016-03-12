@@ -29,7 +29,7 @@ public class Main {
         return "Hello";
     }
     
-    @RequestMapping("/pay")
+    @RequestMapping("/payAction")
     public String pay(@RequestParam("timestamp") String timestamp, 
     		@RequestParam("phoneId") String phoneIdentifier, 
     		@RequestParam("moteId") String moteId) {
@@ -39,8 +39,9 @@ public class Main {
     	System.out.println("MoteID: " + moteId);
     	
     	if (payService.detailsStored(phoneIdentifier)) {
+    		return "true";
     	}
-        return "Hello";
+        return "false";
     }
     
 
