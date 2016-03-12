@@ -18,9 +18,9 @@ public class PayService {
 	private Map<String, Long> amountLookup = new HashMap<String, Long>();
 
 	public PayService() {
-		amountLookup.put("modeId1", 1000l);
-		amountLookup.put("modeId2", 2000l);
-		amountLookup.put("modeId3", 3000l);
+		amountLookup.put("moteId1", 1000l);
+		amountLookup.put("moteId2", 2000l);
+		amountLookup.put("moteId3", 3000l);
 		this.realexHpp = new RealexHpp(RequestConstants.SECRET);
 	}
 
@@ -31,7 +31,14 @@ public class PayService {
 	 * @return true if they have otherwise false
 	 */
 	public boolean detailsStored(String phoneId) {
-		return true;
+		return customerLookup.get(phoneId) != null;
+	}
+
+	public void addDetails(String phoneId, String payerRef, String cardRef) {
+		CustomerVO customer = new CustomerVO();
+		customer.setPayerRef(payerRef);
+		customer.setCardRef(cardRef);
+		customerLookup.put(phoneId, customer);
 	}
 
 	/**
