@@ -23,8 +23,11 @@ public class PayService {
 
 	private Map<String, Long> amountLookup = new HashMap<String, Long>();
 
+	private String ourMoteId = "b9407f30-f5f8-466e-aff9-25556b57fe6d";
+	private String hardCodedPhoneId = "351533063999440";
+	
 	public PayService() {
-		amountLookup.put("b9407f30-f5f8-466e-aff9-25556b57fe6d", 1000l);
+		amountLookup.put(ourMoteId, 1000l);
 		amountLookup.put("moteId2", 2000l);
 		amountLookup.put("moteId3", 3000l);
 		this.realexHpp = new RealexHpp(RequestConstants.SECRET);
@@ -55,19 +58,19 @@ public class PayService {
 	 */
 	public String generateJsonRequest(HppRequest hppRequest) {
 
-		String moteId = hppRequest.getCommentOne();
+		/*String moteId = hppRequest.getCommentOne();
 		String phoneId = hppRequest.getCommentTwo();
 		System.out.println("moteId: " + moteId);
 		System.out.println("phoneId: " + phoneId);
-		System.out.println(hppRequest.getMerchantId());
+		System.out.println(hppRequest.getMerchantId());*/
 		
 		hppRequest
 				.addMerchantId(RequestConstants.MERCHANT_ID)
-				.addAmount(getAmountToCharge(moteId))
+				.addAmount(getAmountToCharge(ourMoteId))
 				.addAutoSettleFlag(true)
 				.addCardStorageEnable(true)
 				.addCurrency(RequestConstants.CURRENCY)
-				.addPayerReference(phoneId)
+				.addPayerReference(hardCodedPhoneId)
 				.addPayerExists(false)
 				.addOfferSaveCard(true);
 
